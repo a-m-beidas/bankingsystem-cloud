@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class TestSecurityApplication {
 	RoleRepository roleRepository;
 
 	@Autowired
-	PasswordEncoder bcryptEncoder;
+	BCryptPasswordEncoder bcryptEncoder;
 
 	private int counter;
 
@@ -67,4 +68,5 @@ public class TestSecurityApplication {
 		temp.addAll(Arrays.asList(roles));
 		return temp;
 	}
+
 }

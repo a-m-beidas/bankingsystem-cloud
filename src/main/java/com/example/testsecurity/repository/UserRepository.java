@@ -12,6 +12,6 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
 
     Users findByUsername(String username);
 
-    @Query("update users set balance = balance + :amount where user_id = :userId")
+    @Query(value = "UPDATE users u SET u.balance = u.balance + ?1: WHERE u.user_id = ?2", nativeQuery = true)
     void changeBalanceByAmount(float amount, int userId);
 }
