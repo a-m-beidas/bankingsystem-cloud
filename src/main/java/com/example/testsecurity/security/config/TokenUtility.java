@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 import com.example.testsecurity.security.model.CustomUserDetails;
+import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,13 +42,15 @@ public class TokenUtility implements Serializable {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-    public int getUserIdFromToken(String token) {
+    public Object getUserIdFromToken(String token) {
         Claims claims = getAllClaimsFromToken(token);
-        return (int) claims.get("id");
+        return claims.get("id");
     }
 
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
+        Claims temp = claims;
+        DefaultClaims s;
         return claimsResolver.apply(claims);
     }
 

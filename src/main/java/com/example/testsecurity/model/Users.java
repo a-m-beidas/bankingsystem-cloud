@@ -30,6 +30,7 @@ public class Users {
     public Users(String username, String password, float balance, ArrayList<Roles> roles) {
         this.username = username;
         this.password = password;
+        this.balance = balance;
         this.roles = roles;
     }
 

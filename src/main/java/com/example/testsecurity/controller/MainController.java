@@ -41,11 +41,10 @@ public class MainController {
     }
 
     @PostMapping(path = "/authenticate")
-    public ResponseEntity<String> login(@RequestBody Users user) throws Exception {
+    public ResponseEntity<String> login(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Users user) throws Exception {
         authenticate(user.getUsername(), user.getPassword());
         CustomUserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-        String token = tokenUtility.generateToken(userDetails);
-        return new ResponseEntity<String>(token, HttpStatus.OK);
+        return new ResponseEntity<String>(authorizationHeader, HttpStatus.OK);
     }
 
     private void authenticate(String username, String password) throws Exception {

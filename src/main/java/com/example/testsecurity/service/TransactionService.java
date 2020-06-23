@@ -18,19 +18,24 @@ public class TransactionService {
     TokenUtility tokenUtility;
 
     public int deposit(float amountToDeposit, String authorizationHeader) throws ClassNotFoundException {
-        int userId = getUserFromHeader(authorizationHeader);
+        String token = headerToToken(authorizationHeader);
+        int userId = getUserFromJWT(token);
         userRepository.changeBalanceByAmount(amountToDeposit, userId);
         return userId;
     }
 
     public int withdraw(float amountToWithdraw, String authorizationHeader) throws ClassNotFoundException {
-        int userId = getUserFromHeader(authorizationHeader);
+        String token = headerToToken(authorizationHeader);
+        int userId = getUserFromJWT(token);
         userRepository.changeBalanceByAmount(amountToWithdraw, userId);
         return userId;
     }
 
-    public int getUserFromHeader(String authorizationHeader) throws ClassNotFoundException {
-        String token = authorizationHeader.substring(7);
-        return tokenUtility.getUserIdFromToken(token);
+    private int getUserFromJWT(String token) throws ClassNotFoundException {
+        return (int) tokenUtility.getUserIdFromToken(token);
+    }
+
+    private String headerToToken(String header) {
+        return header.substring(7);
     }
 }

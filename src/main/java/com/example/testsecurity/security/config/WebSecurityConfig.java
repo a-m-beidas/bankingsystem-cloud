@@ -33,7 +33,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 //Permit access to these paths without authentication
                 .antMatchers("/register", "/authenticate").permitAll()
-                //TODO authorization for authenticated users
+                //Authenticate users according to their role
+                .antMatchers("/transactions/**").authenticated()
                 //Otherwise Deny any access even if authenticated
                 .anyRequest().denyAll()
             .and()
@@ -48,13 +49,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 
     @Bean
-    public AuthenticationManager authenticationManager() throws Exception {
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 }
