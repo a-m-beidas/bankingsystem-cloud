@@ -1,4 +1,4 @@
-package com.example.testsecurity.config;
+package com.example.testsecurity.security.config;
 
 import java.io.Serializable;
 
@@ -10,6 +10,7 @@ import java.util.Map;
 
 import java.util.function.Function;
 
+import com.example.testsecurity.security.model.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,6 +41,11 @@ public class TokenUtility implements Serializable {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
+    public int getUserIdFromToken(String token) {
+        Claims claims = getAllClaimsFromToken(token);
+        return (int) claims.get("id");
+    }
+
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
@@ -57,8 +63,9 @@ public class TokenUtility implements Serializable {
     }
 
     //generate token for user
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(CustomUserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("id", userDetails.getId());
         return doGenerateToken(claims, userDetails.getUsername());
     }
 

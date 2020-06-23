@@ -1,4 +1,4 @@
-package com.example.testsecurity.config;
+package com.example.testsecurity.security.config;
 
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -8,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
-import com.example.testsecurity.services.CustomUserDetailsService;
+import com.example.testsecurity.security.service.CustomUserDetailsService;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

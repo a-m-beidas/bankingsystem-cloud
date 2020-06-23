@@ -1,9 +1,10 @@
-package com.example.testsecurity.services;
+package com.example.testsecurity.security.service;
 
 
 import com.example.testsecurity.model.Roles;
 import com.example.testsecurity.model.Users;
 import com.example.testsecurity.repository.UserRepository;
+import com.example.testsecurity.security.model.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -31,7 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Users user = repository.findByUsername(username);
         ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(user.getRoles().size());
         for (Roles role: user.getRoles()) {
@@ -39,7 +40,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         AuthorityUtils utils = null;
         utils.createAuthorityList();
-        return new User(user.getUsername(), user.getPassword(), authorities);
+        return new CustomUserDetails(user.getUsername(), user.getPassword(), user.getId(), authorities);
     }
 
     public Users save(Users user) {

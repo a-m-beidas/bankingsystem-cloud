@@ -12,13 +12,14 @@ public class Users {
 
     @Id
     @GeneratedValue
-    @Column(name = "student_id")
+    @Column(name = "user_id")
     private int id;
     private String username;
     private String password;
+    private float balance;
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "student_has_roles",
-            joinColumns = @JoinColumn(name = "student_id"),
+    @JoinTable(name = "user_has_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Roles> roles;
 
@@ -26,11 +27,12 @@ public class Users {
 
     }
 
-    public Users(String username, String password, ArrayList<Roles> roles) {
+    public Users(String username, String password, float balance, ArrayList<Roles> roles) {
         this.username = username;
         this.password = password;
         this.roles = roles;
     }
+
 
     public int getId() {
         return id;

@@ -1,4 +1,4 @@
-package com.example.testsecurity.config;
+package com.example.testsecurity.security.config;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
