@@ -13,4 +13,11 @@ public class MainControllerAdvice {
         //TODO add a logger
         return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<String> genericHandler(IllegalArgumentException e) throws Exception {
+        e.printStackTrace();
+        //TODO add a logger
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

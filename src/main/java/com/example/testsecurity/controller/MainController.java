@@ -36,28 +36,40 @@ public class MainController {
 
     @RequestMapping(path = "/transactions/deposit", method = RequestMethod.POST)
     public ResponseEntity<String> deposit(@RequestHeader("Authorization") String authorizationHeader, @RequestBody TransactionRequestBody requestBody) throws ClassNotFoundException {
-        if (requestBody.getToUser() != null) {
-            throw new IllegalArgumentException("toUser object is used in deposit method");
+        if (requestBody.getToUser() != 0) {
+            throw new IllegalArgumentException("invalid request body");
         }
         float amount = requestBody.getAmount();
+        if (amount <= 0) {
+            throw new IllegalArgumentException("amount must be a positive decimal");
+        }
         int userId = transactionService.deposit(amount, authorizationHeader);
         return new ResponseEntity<String>("Deposit to user " + userId + " of amount " + amount, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/transactions/withdraw", method = RequestMethod.POST)
     public ResponseEntity<String> withdraw(@RequestHeader("Authorization") String authorizationHeader, @RequestBody TransactionRequestBody requestBody) throws ClassNotFoundException {
-        if (requestBody.getToUser() != null) {
-            throw new IllegalArgumentException("To user object is used in withdraw method");
+        if (requestBody.getToUser() != 0) {
+            throw new IllegalArgumentException("invalid request body");
         }
         float amount = requestBody.getAmount();
+        if (amount <= 0) {
+            throw new IllegalArgumentException("amount must be a positive decimal");
+        }
         int userId = transactionService.withdraw(amount, authorizationHeader);
         return new ResponseEntity<String>("Withdraw to user " + userId + " of amount " + amount, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/transactions/transfer", method = RequestMethod.POST)
     public ResponseEntity<String> transfer(@RequestHeader("Authorization") String authorizationHeader, @RequestBody TransactionRequestBody requestBody) throws ClassNotFoundException {
+        int transfereeId = requestBody.getToUser();
+        if (transfereeId == 0) {
+            throw new IllegalArgumentException("invalid request body");
+        }
         float amount = requestBody.getAmount();
-        int transfereeId = Integer.parseInt(requestBody.getToUser());
+        if (amount <= 0) {
+            throw new IllegalArgumentException("amount must be a positive decimal");
+        }
         int transfererId = transactionService.transfer(authorizationHeader, transfereeId, amount);
         return new ResponseEntity<String>("Transfer from user with id " + transfererId + " to user with id " + transfereeId, HttpStatus.OK);
     }

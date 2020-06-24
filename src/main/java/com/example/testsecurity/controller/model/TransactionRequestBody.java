@@ -8,24 +8,17 @@ import com.example.testsecurity.controller.MainController;
  */
 public class TransactionRequestBody {
 
-    private final String toUser;
+    private final int toUser;
     private final float amount;
 
-    public TransactionRequestBody() {
-        throw new IllegalArgumentException("Constructor must not be used");
-    }
 
-    public TransactionRequestBody(String toUser, float amount) {
+    public TransactionRequestBody(int toUser, float amount) {
+        //TODO throw custom exception
         this.toUser = toUser;
         this.amount = amount;
     }
 
-    public TransactionRequestBody(float amount) {
-        this.amount = amount;
-        this.toUser = null;
-    }
-
-    public String getToUser() {
+    public int getToUser() {
         return toUser;
     }
 
