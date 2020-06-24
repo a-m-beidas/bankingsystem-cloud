@@ -1,9 +1,9 @@
-package com.example.testsecurity;
+package org.bank;
 
-import com.example.testsecurity.model.Role;
-import com.example.testsecurity.model.User;
-import com.example.testsecurity.repository.RoleRepository;
-import com.example.testsecurity.repository.UserRepository;
+import org.bank.model.Role;
+import org.bank.model.User;
+import org.bank.repository.RoleRepository;
+import org.bank.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

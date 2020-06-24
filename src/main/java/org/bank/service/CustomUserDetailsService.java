@@ -1,10 +1,10 @@
-package com.example.testsecurity.service;
+package org.bank.service;
 
 
-import com.example.testsecurity.model.Role;
-import com.example.testsecurity.model.User;
-import com.example.testsecurity.repository.UserRepository;
-import com.example.testsecurity.model.CustomUserDetails;
+import org.bank.model.Role;
+import org.bank.model.User;
+import org.bank.repository.UserRepository;
+import org.bank.model.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;

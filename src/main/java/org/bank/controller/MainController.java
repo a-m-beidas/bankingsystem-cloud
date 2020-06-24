@@ -1,11 +1,10 @@
-package com.example.testsecurity.controller;
+package org.bank.controller;
 
-import com.example.testsecurity.model.TransactionRequestBody;
-import com.example.testsecurity.model.User;
-import com.example.testsecurity.security.TokenUtility;
-import com.example.testsecurity.model.CustomUserDetails;
-import com.example.testsecurity.service.CustomUserDetailsService;
-import com.example.testsecurity.service.TransactionService;
+import org.bank.model.User;
+import org.bank.security.TokenUtility;
+import org.bank.model.CustomUserDetails;
+import org.bank.service.CustomUserDetailsService;
+import org.bank.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

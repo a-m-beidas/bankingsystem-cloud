@@ -1,6 +1,6 @@
-package com.example.testsecurity.repository;
+package org.bank.repository;
 
-import com.example.testsecurity.model.Role;
+import org.bank.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoleRepository extends JpaRepository<Role, Integer> {

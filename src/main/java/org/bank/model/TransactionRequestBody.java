@@ -1,6 +1,6 @@
-package com.example.testsecurity.model;
+package org.bank.model;
 
-import com.example.testsecurity.controller.MainController;
+import org.bank.controller.MainController;
 /**
  * Used for mapping Request bodies in {@link MainController}
  * {@link #toUser} is null for the transactions deposit and withdraw

@@ -1,4 +1,4 @@
-package com.example.testsecurity.model;
+package org.bank.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;

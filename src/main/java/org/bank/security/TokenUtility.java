@@ -1,4 +1,4 @@
-package com.example.testsecurity.security;
+package org.bank.security;
 
 import java.io.Serializable;
 
@@ -10,9 +10,9 @@ import java.util.Map;
 
 import java.util.function.Function;
 
-import com.example.testsecurity.model.User;
-import com.example.testsecurity.model.CustomUserDetails;
-import com.example.testsecurity.controller.MainController;
+import org.bank.model.User;
+import org.bank.model.CustomUserDetails;
+import org.bank.controller.MainController;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Value;
 

@@ -1,7 +1,7 @@
-package com.example.testsecurity.service;
+package org.bank.service;
 
-import com.example.testsecurity.repository.UserRepository;
-import com.example.testsecurity.security.TokenUtility;
+import org.bank.repository.UserRepository;
+import org.bank.security.TokenUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

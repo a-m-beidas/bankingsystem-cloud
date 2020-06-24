@@ -1,6 +1,6 @@
-package com.example.testsecurity.repository;
+package org.bank.repository;
 
-import com.example.testsecurity.model.User;
+import org.bank.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

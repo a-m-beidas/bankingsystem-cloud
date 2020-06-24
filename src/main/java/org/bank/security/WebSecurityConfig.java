@@ -1,8 +1,8 @@
-package com.example.testsecurity.security;
+package org.bank.security;
 
-import com.example.testsecurity.config.AccessDeniedHandlerImpl;
-import com.example.testsecurity.config.AuthenticationEntryPointImpl;
-import com.example.testsecurity.service.CustomUserDetailsService;
+import org.bank.config.AccessDeniedHandlerImpl;
+import org.bank.config.AuthenticationEntryPointImpl;
+import org.bank.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
