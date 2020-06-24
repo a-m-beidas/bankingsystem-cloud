@@ -1,10 +1,10 @@
 package com.example.testsecurity.controller;
 
-import com.example.testsecurity.controller.model.TransactionRequestBody;
+import com.example.testsecurity.model.TransactionRequestBody;
 import com.example.testsecurity.model.Users;
-import com.example.testsecurity.security.config.TokenUtility;
-import com.example.testsecurity.security.model.CustomUserDetails;
-import com.example.testsecurity.security.service.CustomUserDetailsService;
+import com.example.testsecurity.security.TokenUtility;
+import com.example.testsecurity.model.CustomUserDetails;
+import com.example.testsecurity.service.CustomUserDetailsService;
 import com.example.testsecurity.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +14,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 public class MainController {

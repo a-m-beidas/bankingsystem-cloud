@@ -1,4 +1,4 @@
-package com.example.testsecurity.security.config;
+package com.example.testsecurity.security;
 
 import java.io.Serializable;
 
@@ -11,8 +11,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 import com.example.testsecurity.model.Users;
-import com.example.testsecurity.security.model.CustomUserDetails;
-import com.example.testsecurity.security.service.CustomUserDetailsService;
+import com.example.testsecurity.model.CustomUserDetails;
 import com.example.testsecurity.controller.MainController;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +25,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Component
 public class TokenUtility implements Serializable {

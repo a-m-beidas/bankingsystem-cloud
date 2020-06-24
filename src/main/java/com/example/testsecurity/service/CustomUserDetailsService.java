@@ -1,16 +1,14 @@
-package com.example.testsecurity.security.service;
+package com.example.testsecurity.service;
 
 
 import com.example.testsecurity.model.Roles;
 import com.example.testsecurity.model.Users;
 import com.example.testsecurity.repository.UserRepository;
-import com.example.testsecurity.security.model.CustomUserDetails;
+import com.example.testsecurity.model.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;

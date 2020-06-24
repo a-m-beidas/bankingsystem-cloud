@@ -1,6 +1,6 @@
-package com.example.testsecurity.security.model;
+package com.example.testsecurity.model;
 
-import com.example.testsecurity.security.config.TokenUtility;
+import com.example.testsecurity.security.TokenUtility;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import java.util.Collection;

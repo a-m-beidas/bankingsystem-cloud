@@ -1,4 +1,4 @@
-package com.example.testsecurity.controller.model;
+package com.example.testsecurity.model;
 
 import com.example.testsecurity.controller.MainController;
 /**

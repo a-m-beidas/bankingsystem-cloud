@@ -1,6 +1,8 @@
-package com.example.testsecurity.security.config;
+package com.example.testsecurity.security;
 
-import com.example.testsecurity.security.service.CustomUserDetailsService;
+import com.example.testsecurity.config.AccessDeniedHandlerImpl;
+import com.example.testsecurity.config.AuthenticationEntryPointImpl;
+import com.example.testsecurity.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

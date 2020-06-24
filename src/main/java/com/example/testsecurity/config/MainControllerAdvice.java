@@ -1,4 +1,4 @@
-package com.example.testsecurity.controller;
+package com.example.testsecurity.config;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -6,27 +6,19 @@ import com.example.testsecurity.repository.RoleRepository;
 import com.example.testsecurity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
 
 @EnableSwagger2
 @SpringBootApplication
-public class TestSecurityApplication {
+public class BankApplication {
 
 	@Autowired
 	UserRepository userRepository;
@@ -42,7 +34,7 @@ public class TestSecurityApplication {
 	private HashMap<String, Roles> roles;
 
 	public static void main(String[] args) {
-		SpringApplication.run(TestSecurityApplication.class, args);
+		SpringApplication.run(BankApplication.class, args);
 	}
 
 	@EventListener
