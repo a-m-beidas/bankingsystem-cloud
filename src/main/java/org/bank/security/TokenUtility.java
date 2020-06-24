@@ -12,7 +12,7 @@ import java.util.function.Function;
 
 import org.bank.model.User;
 import org.bank.model.CustomUserDetails;
-import org.bank.controller.MainController;
+import org.bank.controller.AuthenticationController;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -75,7 +75,7 @@ public class TokenUtility implements Serializable {
 
     /**
      * Generates the token with the id in the payload
-     * called by {@link MainController#login(User)} <br>
+     * called by {@link AuthenticationController#login(User)} <br>
      * Id retrieval by {@link #getUserIdFromToken(String)} <br>
      * see {@link CustomUserDetails} <br>
      * @param userDetails

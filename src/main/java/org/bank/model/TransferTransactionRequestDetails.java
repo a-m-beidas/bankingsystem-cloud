@@ -1,8 +1,8 @@
 package org.bank.model;
 
-import org.bank.controller.MainController;
+import org.bank.controller.AuthenticationController;
 /**
- * Used for mapping Request bodies in {@link MainController}
+ * Used for mapping Request bodies in {@link AuthenticationController}
  *
  */
 public class TransferTransactionRequestDetails {
