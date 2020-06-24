@@ -24,6 +24,7 @@ public class AuthenticationService {
     CustomUserDetailsService userDetailsService;
 
     public String authenticate(User user) throws Exception {
+        validateUser(user);
         try {
             authenticationManger.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         } catch (DisabledException e) {
@@ -33,5 +34,14 @@ public class AuthenticationService {
         }
         CustomUserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
         return tokenUtility.generateToken(userDetails);
+    }
+
+    private void validateUser(User user) {
+        if (user.getUsername() == null) {
+            throw new IllegalArgumentException("No username provided");
+        }
+        if (user.getPassword() == null) {
+            throw new IllegalArgumentException("No password provided");
+        }
     }
 }
