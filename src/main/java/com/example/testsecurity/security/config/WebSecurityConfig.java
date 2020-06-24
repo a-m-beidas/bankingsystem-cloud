@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .authorizeRequests()
                 //Permit access to these paths without authentication
-                .antMatchers("/register", "/authenticate").permitAll()
+                .antMatchers("/register", "/authenticate", "/v2/**").permitAll()
                 //Authenticate users according to their role
                 .antMatchers("/transactions/**").authenticated()
                 //Otherwise Deny any access even if authenticated
