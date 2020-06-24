@@ -16,6 +16,9 @@ public class TransactionRequestBody {
         //TODO throw custom exception
         this.toUser = toUser;
         this.amount = amount;
+        if (amount <= 0) {
+            throw new IllegalArgumentException("amount must be a positive decimal");
+        }
     }
 
     public int getToUser() {
