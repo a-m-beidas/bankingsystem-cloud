@@ -31,6 +31,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         super();
     }
 
+    /**
+     * Overrides the {@link UserDetailsService#loadUserByUsername(String)} method
+     * @return returns {@link CustomUserDetails}
+     */
     @Override
     public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Users user = repository.findByUsername(username);

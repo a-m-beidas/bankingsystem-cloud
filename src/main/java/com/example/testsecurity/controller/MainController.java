@@ -1,5 +1,6 @@
 package com.example.testsecurity.controller;
 
+import com.example.testsecurity.controller.model.TransactionRequestBody;
 import com.example.testsecurity.model.Users;
 import com.example.testsecurity.security.config.TokenUtility;
 import com.example.testsecurity.security.model.CustomUserDetails;
@@ -34,17 +35,39 @@ public class MainController {
     CustomUserDetailsService userDetailsService;
 
     @RequestMapping(path = "/transactions/deposit", method = RequestMethod.POST)
-    public ResponseEntity<String> deposit(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Map<String, String> requestBody) throws ClassNotFoundException {
-        float amount = Float.parseFloat(requestBody.get("amount"));
+    public ResponseEntity<String> deposit(@RequestHeader("Authorization") String authorizationHeader, @RequestBody TransactionRequestBody requestBody) throws ClassNotFoundException {
+        if (requestBody.getToUser() != null) {
+            throw new IllegalArgumentException("toUser object is used in deposit method");
+        }
+        float amount = requestBody.getAmount();
         int userId = transactionService.deposit(amount, authorizationHeader);
-        return new ResponseEntity<String>("Deposit to user " + userId + " if amount " + amount, HttpStatus.OK);
+        return new ResponseEntity<String>("Deposit to user " + userId + " of amount " + amount, HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/transactions/withdraw", method = RequestMethod.POST)
+    public ResponseEntity<String> withdraw(@RequestHeader("Authorization") String authorizationHeader, @RequestBody TransactionRequestBody requestBody) throws ClassNotFoundException {
+        if (requestBody.getToUser() != null) {
+            throw new IllegalArgumentException("To user object is used in withdraw method");
+        }
+        float amount = requestBody.getAmount();
+        int userId = transactionService.withdraw(amount, authorizationHeader);
+        return new ResponseEntity<String>("Withdraw to user " + userId + " of amount " + amount, HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/transactions/transfer", method = RequestMethod.POST)
+    public ResponseEntity<String> transfer(@RequestHeader("Authorization") String authorizationHeader, @RequestBody TransactionRequestBody requestBody) throws ClassNotFoundException {
+        float amount = requestBody.getAmount();
+        int transfereeId = Integer.parseInt(requestBody.getToUser());
+        int transfererId = transactionService.transfer(authorizationHeader, transfereeId, amount);
+        return new ResponseEntity<String>("Transfer from user with id " + transfererId + " to user with id " + transfereeId, HttpStatus.OK);
     }
 
     @PostMapping(path = "/authenticate")
-    public ResponseEntity<String> login(@RequestHeader("Authorization") String authorizationHeader, @RequestBody Users user) throws Exception {
+    public ResponseEntity<String> login(@RequestBody Users user) throws Exception {
         authenticate(user.getUsername(), user.getPassword());
         CustomUserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-        return new ResponseEntity<String>(authorizationHeader, HttpStatus.OK);
+        String token = tokenUtility.generateToken(userDetails);
+        return new ResponseEntity<String>(token, HttpStatus.OK);
     }
 
     private void authenticate(String username, String password) throws Exception {
