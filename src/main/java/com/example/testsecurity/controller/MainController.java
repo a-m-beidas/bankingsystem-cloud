@@ -1,7 +1,7 @@
 package com.example.testsecurity.controller;
 
 import com.example.testsecurity.model.TransactionRequestBody;
-import com.example.testsecurity.model.Users;
+import com.example.testsecurity.model.User;
 import com.example.testsecurity.security.TokenUtility;
 import com.example.testsecurity.model.CustomUserDetails;
 import com.example.testsecurity.service.CustomUserDetailsService;
@@ -59,7 +59,7 @@ public class MainController {
     }
 
     @PostMapping(path = "/authenticate")
-    public ResponseEntity<String> login(@RequestBody Users user) throws Exception {
+    public ResponseEntity<String> login(@RequestBody User user) throws Exception {
         authenticate(user.getUsername(), user.getPassword());
         CustomUserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
         String token = tokenUtility.generateToken(userDetails);

@@ -1,14 +1,12 @@
 package com.example.testsecurity.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Entity
-public class Users {
+@Table(name = "users")
+public class User {
 
     @Id
     @GeneratedValue
@@ -21,13 +19,13 @@ public class Users {
     @JoinTable(name = "user_has_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Roles> roles;
+    private List<Role> roles;
 
-    public Users() {
+    public User() {
 
     }
 
-    public Users(String username, String password, float balance, ArrayList<Roles> roles) {
+    public User(String username, String password, float balance, ArrayList<Role> roles) {
         this.username = username;
         this.password = password;
         this.balance = balance;
@@ -47,7 +45,7 @@ public class Users {
         return password;
     }
 
-    public List<Roles> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
@@ -59,7 +57,7 @@ public class Users {
         this.username = username;
     }
 
-    public void setRoles(List<Roles> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 }

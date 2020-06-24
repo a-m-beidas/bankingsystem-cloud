@@ -1,17 +1,17 @@
 package com.example.testsecurity.repository;
 
-import com.example.testsecurity.model.Users;
+import com.example.testsecurity.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 
-public interface UserRepository extends JpaRepository<Users, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
 
 
-    Users findByUsername(String username);
+    User findByUsername(String username);
 
     @Modifying
     @Transactional

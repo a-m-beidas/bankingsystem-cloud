@@ -10,7 +10,7 @@ import java.util.Map;
 
 import java.util.function.Function;
 
-import com.example.testsecurity.model.Users;
+import com.example.testsecurity.model.User;
 import com.example.testsecurity.model.CustomUserDetails;
 import com.example.testsecurity.controller.MainController;
 import io.jsonwebtoken.impl.DefaultClaims;
@@ -75,7 +75,7 @@ public class TokenUtility implements Serializable {
 
     /**
      * Generates the token with the id in the payload
-     * called by {@link MainController#login(Users)} <br>
+     * called by {@link MainController#login(User)} <br>
      * Id retrieval by {@link #getUserIdFromToken(String)} <br>
      * see {@link CustomUserDetails} <br>
      * @param userDetails

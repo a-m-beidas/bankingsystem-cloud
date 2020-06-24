@@ -1,7 +1,7 @@
 package com.example.testsecurity;
 
-import com.example.testsecurity.model.Roles;
-import com.example.testsecurity.model.Users;
+import com.example.testsecurity.model.Role;
+import com.example.testsecurity.model.User;
 import com.example.testsecurity.repository.RoleRepository;
 import com.example.testsecurity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class BankApplication {
 
 	private int counter;
 
-	private HashMap<String, Roles> roles;
+	private HashMap<String, Role> roles;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BankApplication.class, args);
@@ -39,27 +39,27 @@ public class BankApplication {
 
 	@EventListener
 	void handleApplicationReadyEvent(ApplicationReadyEvent event) {
-		roles = new HashMap<String, Roles>();
-		Roles admin = new Roles("admin");
-		Roles user = new Roles("user");
+		roles = new HashMap<String, Role>();
+		Role admin = new Role("admin");
+		Role user = new Role("user");
 		roles.put("admin", admin);
 		roles.put("user", user);
 		roleRepository.saveAll(roles.values());
-		ArrayList<Users> users = new ArrayList<Users>();
-		users.add(new Users("John", bcryptEncoder.encode("123"), 30000.0f, getRolesArrayList(user)));
-		users.add(new Users("Matt", bcryptEncoder.encode("124"), 500.0f, getRolesArrayList(user)));
-		users.add(new Users("Blake", bcryptEncoder.encode("125"), 5050.f, getRolesArrayList(user)));
+		ArrayList<User> users = new ArrayList<User>();
+		users.add(new User("John", bcryptEncoder.encode("123"), 30000.0f, getRolesArrayList(user)));
+		users.add(new User("Matt", bcryptEncoder.encode("124"), 500.0f, getRolesArrayList(user)));
+		users.add(new User("Blake", bcryptEncoder.encode("125"), 5050.f, getRolesArrayList(user)));
 		userRepository.saveAll(users);
 	}
 
 	private void addRole(String roleName) {
-		Roles role = new Roles(roleName);
+		Role role = new Role(roleName);
 		roles.put(roleName, role);
 		counter++;
 	}
 
-	private ArrayList<Roles> getRolesArrayList(Roles... roles) {
-		ArrayList<Roles> temp = new ArrayList<Roles>(counter);
+	private ArrayList<Role> getRolesArrayList(Role... roles) {
+		ArrayList<Role> temp = new ArrayList<Role>(counter);
 		temp.addAll(Arrays.asList(roles));
 		return temp;
 	}

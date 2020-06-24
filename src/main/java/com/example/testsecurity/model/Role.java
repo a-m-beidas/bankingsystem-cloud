@@ -3,16 +3,18 @@ package com.example.testsecurity.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Roles {
+@Table(name = "roles")
+public class Role {
     @Id
     @Column(name = "role_type")
     private String roleType;
 
-    public Roles() { }
+    public Role() { }
 
-    public Roles(String roleType) {
+    public Role(String roleType) {
         this.roleType = roleType;
     }
 

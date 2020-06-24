@@ -1,8 +1,8 @@
 package com.example.testsecurity.service;
 
 
-import com.example.testsecurity.model.Roles;
-import com.example.testsecurity.model.Users;
+import com.example.testsecurity.model.Role;
+import com.example.testsecurity.model.User;
 import com.example.testsecurity.repository.UserRepository;
 import com.example.testsecurity.model.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +35,9 @@ public class CustomUserDetailsService implements UserDetailsService {
      */
     @Override
     public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users user = repository.findByUsername(username);
+        User user = repository.findByUsername(username);
         ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(user.getRoles().size());
-        for (Roles role: user.getRoles()) {
+        for (Role role: user.getRoles()) {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRole()));
         }
         AuthorityUtils utils = null;
@@ -45,7 +45,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new CustomUserDetails(user.getUsername(), user.getPassword(), user.getId(), authorities);
     }
 
-    public Users save(Users user) {
+    public User save(User user) {
         if(user.getRoles().isEmpty())
             throw new IllegalStateException("User must have at least one role");
         user.setPassword(bcryptEncoder.encode(user.getPassword()));
