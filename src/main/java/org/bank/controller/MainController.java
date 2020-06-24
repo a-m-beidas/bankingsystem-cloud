@@ -20,8 +20,6 @@ public class MainController {
     @Autowired
     AuthenticationManager authenticationManger;
 
-    @Autowired
-    TransactionService transactionService;
 
     @Autowired
     TokenUtility tokenUtility;
