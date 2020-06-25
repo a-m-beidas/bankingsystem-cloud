@@ -3,7 +3,12 @@ package org.bank.model;
 import javax.persistence.*;
 import java.util.Date;
 
+
 @MappedSuperclass
+/**
+ * Transaction is a super class for the two classes TransferTransaction and NonTransferTransaction, annotated with @MappedSuperclass
+ * will not create a table in the database but provides functionality and fields to the subclasses
+ */
 public class Transaction {
 
     protected Transaction(User byUser, TransactionType transactionType, float amount, Date date) {

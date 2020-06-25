@@ -5,6 +5,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "transfer_transactions")
+/**
+ * Represents the table transfer_transactions that stores deposit and withdraw transactions, extends {@link Transaction}
+ */
 public class TransferTransaction extends Transaction {
 
     @ManyToOne(fetch = FetchType.LAZY)
