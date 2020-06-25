@@ -33,7 +33,6 @@ public class User {
     private boolean loggedOut;
 
     public User() {
-        loggedOut = false;
     }
 
     public User(String username, String password, float balance, ArrayList<Role> roles) {

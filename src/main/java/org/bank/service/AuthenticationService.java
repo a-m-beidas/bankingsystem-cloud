@@ -29,6 +29,7 @@ public class AuthenticationService {
     CustomUserDetailsService userDetailsService;
 
     public String authenticate(User user) throws Exception {
+        //TODO check if already logged in
         validateUser(user);
         try {
             authenticationManger.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
@@ -38,17 +39,14 @@ public class AuthenticationService {
             throw new Exception("Bad Credentials");
         }
         CustomUserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-        if (user.isLoggedOut()) {
-            user.setLoggedIn();
-        }
-        userRepository.save(user);
+        userRepository.login(user.getUsername());
         return tokenUtility.generateToken(userDetails);
     }
 
     public void logout(String authorizationHeader) throws ClassNotFoundException {
         SecurityContextHolder.clearContext();
         int userId = tokenUtility.getUserIdFromHeader(authorizationHeader);
-        userRepository.logOut(userId);
+        userRepository.logout(userId);
     }
 
     private void validateUser(User user) {

@@ -65,5 +65,4 @@ public class RequestFilter extends OncePerRequestFilter {
         return new BCryptPasswordEncoder();
     }
 
-
 }

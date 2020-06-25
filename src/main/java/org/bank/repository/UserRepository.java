@@ -19,6 +19,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     void changeBalanceByAmount(float amount, int userId);
 
     @Modifying
+    @Transactional
     @Query(value = "UPDATE users u SET u.logged_out = TRUE WHERE u.id = ?1", nativeQuery = true)
-    void logOut(int userId);
+    void logout(int userId);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE users u SET u.logged_out = FALSE WHERE u.username = ?1", nativeQuery = true)
+    void login(String username);
 }

@@ -25,6 +25,7 @@ public class CustomUserDetails extends User {
     public CustomUserDetails(String username, String password, int userId, boolean loggedOut, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
         id = userId;
+        this.loggedOut = loggedOut;
     }
 
     public boolean isLoggedOut() {
