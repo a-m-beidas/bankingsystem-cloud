@@ -43,6 +43,13 @@ public class User {
         this.roles = roles;
     }
 
+    public void setLoggedIn() {
+        loggedOut = false;
+    }
+
+    public boolean isLoggedOut() {
+        return loggedOut;
+    }
 
     public int getId() {
         return id;

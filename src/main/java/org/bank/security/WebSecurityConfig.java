@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -40,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/v2/**").permitAll()
                 //Authenticate users according to their role
                 .antMatchers(HttpMethod.POST,"/transactions/**").authenticated()
-                .antMatchers(HttpMethod.POST,"/logout").authenticated()
+                .antMatchers(HttpMethod.GET,"/t").authenticated()
                 //Otherwise Deny any access even if authenticated
                 .anyRequest().denyAll()
             .and()
@@ -52,7 +53,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
                 .addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class);
-
     }
 
     @Autowired

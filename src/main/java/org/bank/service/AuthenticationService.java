@@ -2,16 +2,22 @@ package org.bank.service;
 
 import org.bank.model.CustomUserDetails;
 import org.bank.model.User;
+import org.bank.repository.UserRepository;
 import org.bank.security.TokenUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationService {
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     AuthenticationManager authenticationManger;
@@ -32,11 +38,17 @@ public class AuthenticationService {
             throw new Exception("Bad Credentials");
         }
         CustomUserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+        if (user.isLoggedOut()) {
+            user.setLoggedIn();
+        }
+        userRepository.save(user);
         return tokenUtility.generateToken(userDetails);
     }
 
     public void logout(String authorizationHeader) throws ClassNotFoundException {
+        SecurityContextHolder.clearContext();
         int userId = tokenUtility.getUserIdFromHeader(authorizationHeader);
+        userRepository.logOut(userId);
     }
 
     private void validateUser(User user) {

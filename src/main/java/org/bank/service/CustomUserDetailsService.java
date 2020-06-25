@@ -36,11 +36,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = repository.findByUsername(username);
+        if (user.isLoggedOut())
+            throw new IllegalArgumentException("User is logged out");
         ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(user.getRoles().size());
         for (Role role: user.getRoles()) {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRole()));
         }
-        return new CustomUserDetails(user.getUsername(), user.getPassword(), user.getId(), authorities);
+        return new CustomUserDetails(user.getUsername(), user.getPassword(), user.getId(), user.isLoggedOut(), authorities);
     }
 
     public User save(User user) {
