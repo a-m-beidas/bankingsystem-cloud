@@ -18,11 +18,11 @@ public class Transaction {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "transaction_id")
     private int transactionId;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "by_user", referencedColumnName = "id")
+    @JoinColumn(name = "by_user", referencedColumnName = "id", nullable = false)
     private User byUser;
     @Column(name = "transaction_type")
     @Enumerated(EnumType.STRING)

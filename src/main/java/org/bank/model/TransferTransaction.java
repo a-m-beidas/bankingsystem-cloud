@@ -8,7 +8,7 @@ import java.util.Date;
 public class TransferTransaction extends Transaction {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "to_user", referencedColumnName = "id")
+    @JoinColumn(name = "to_user", referencedColumnName = "id", nullable = false)
     private User toUser;
 
     public TransferTransaction(User byUser, User toUser, TransactionType transactionType, float amount, Date date) {
