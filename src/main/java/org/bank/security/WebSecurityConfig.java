@@ -6,9 +6,11 @@ import org.bank.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -34,9 +36,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .authorizeRequests()
                 //Permit access to these paths without authentication
-                .antMatchers("/register", "/authenticate", "/v2/**").permitAll()
+                .antMatchers(HttpMethod.POST,"/register", "/authenticate", "/v2/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/v2/**").permitAll()
                 //Authenticate users according to their role
-                .antMatchers("/transactions/**", "/logout").authenticated()
+                .antMatchers(HttpMethod.POST,"/transactions/**").authenticated()
+                .antMatchers(HttpMethod.POST,"/logout").authenticated()
                 //Otherwise Deny any access even if authenticated
                 .anyRequest().denyAll()
             .and()
