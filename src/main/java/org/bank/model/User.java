@@ -29,8 +29,11 @@ public class User {
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_type"))
     private List<Role> roles;
+    @Column(name = "logged_out")
+    private boolean loggedOut;
 
     public User() {
+        loggedOut = false;
     }
 
     public User(String username, String password, float balance, ArrayList<Role> roles) {

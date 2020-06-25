@@ -16,7 +16,6 @@ public class AuthenticationService {
     @Autowired
     AuthenticationManager authenticationManger;
 
-
     @Autowired
     TokenUtility tokenUtility;
 
@@ -34,6 +33,10 @@ public class AuthenticationService {
         }
         CustomUserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
         return tokenUtility.generateToken(userDetails);
+    }
+
+    public void logout(String authorizationHeader) throws ClassNotFoundException {
+        int userId = tokenUtility.getUserIdFromHeader(authorizationHeader);
     }
 
     private void validateUser(User user) {

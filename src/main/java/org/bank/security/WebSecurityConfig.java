@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //Permit access to these paths without authentication
                 .antMatchers("/register", "/authenticate", "/v2/**").permitAll()
                 //Authenticate users according to their role
-                .antMatchers("/transactions/**").authenticated()
+                .antMatchers("/transactions/**", "/logout").authenticated()
                 //Otherwise Deny any access even if authenticated
                 .anyRequest().denyAll()
             .and()

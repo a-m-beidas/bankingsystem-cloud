@@ -34,7 +34,7 @@ public class TransactionService {
     public String deposit(JsonNode requestBody, String authorizationHeader) throws ClassNotFoundException {
         float amountToDeposit = requestBody.get("amount").floatValue();
         validateAmount(amountToDeposit);
-        int userId = getUserIdFromHeader(authorizationHeader);
+        int userId = tokenUtility.getUserIdFromHeader(authorizationHeader);
         changeBalanceByAmount(amountToDeposit, userId);
         transactionRepository.addNonTransferTransaction(userId, "DEPOSIT", amountToDeposit, new java.sql.Date(new Date().getTime()));
 //        transactionRepository.save(new NonTransferTransaction(user, Transaction.TransactionType.DEPOSIT, amountToDeposit, new Date()));
@@ -52,7 +52,7 @@ public class TransactionService {
     public String withdraw(JsonNode requestBody, String authorizationHeader) throws ClassNotFoundException {
         float amountToWithdraw = requestBody.get("amount").floatValue();
         validateAmount(amountToWithdraw);
-        int userId = getUserIdFromHeader(authorizationHeader);
+        int userId = tokenUtility.getUserIdFromHeader(authorizationHeader);
         changeBalanceByAmount(-1 * amountToWithdraw, userId);
         transactionRepository.addNonTransferTransaction(userId, "WITHDRAW", amountToWithdraw, new java.sql.Date(new Date().getTime()));
 //        transactionRepository.save(new NonTransferTransaction(user, Transaction.TransactionType.WITHDRAW, amountToWithdraw, new Date()));
@@ -70,7 +70,7 @@ public class TransactionService {
      */
     public String transfer(String authorizationHeader, TransferTransactionRequestDetails requestBody) throws ClassNotFoundException {
         validateTransferRequestDetails(requestBody);
-        int transfererId = getUserIdFromHeader(authorizationHeader);
+        int transfererId = tokenUtility.getUserIdFromHeader(authorizationHeader);
         int transfereeId = requestBody.getTransfereeId();
         float amount  = requestBody.getAmount();
         if (transfereeId == transfererId) {
@@ -93,17 +93,6 @@ public class TransactionService {
     @Transactional
     private void changeBalanceByAmount(float amount, int userId) throws ClassNotFoundException {
         userRepository.changeBalanceByAmount(amount, userId);
-    }
-
-    /**
-     * Cuts the authorization request header and gets the token then query the token to JWTs to retrieve the userId
-     * @param authorizationHeader the "Authorization" header as recieve from the controller
-     * @return the userId retrieved
-     * @throws ClassNotFoundException
-     */
-    private int getUserIdFromHeader(String authorizationHeader) throws ClassNotFoundException {
-        String token = authorizationHeader.substring(7);
-        return (int) tokenUtility.getUserIdFromToken(token);
     }
 
     private void validateAmount(float amount) {
