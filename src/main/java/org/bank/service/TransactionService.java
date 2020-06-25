@@ -1,17 +1,24 @@
 package org.bank.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.bank.model.TransferTransactionRequestDetails;
+import org.bank.model.*;
+import org.bank.repository.TransactionRepository;
 import org.bank.repository.UserRepository;
 import org.bank.security.TokenUtility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
+import java.util.Date;
 
 @Service
 public class TransactionService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    TransactionRepository transactionRepository;
 
     @Autowired
     TokenUtility tokenUtility;
@@ -28,7 +35,8 @@ public class TransactionService {
         float amountToDeposit = requestBody.get("amount").floatValue();
         validateAmount(amountToDeposit);
         int userId = getUserIdFromHeader(authorizationHeader);
-        changeBalanceByAmount(amountToDeposit, userId);
+        User user = changeBalanceByAmount(amountToDeposit, userId);
+        transactionRepository.save(new NonTransferTransaction(user, Transaction.TransactionType.DEPOSIT, amountToDeposit, new Date()));
         return "Deposit to user " + userId + " of amount " + amountToDeposit;
     }
     /**
@@ -44,7 +52,8 @@ public class TransactionService {
         float amountToWithdraw = requestBody.get("amount").floatValue();
         validateAmount(amountToWithdraw);
         int userId = getUserIdFromHeader(authorizationHeader);
-        userRepository.changeBalanceByAmount(-1 * amountToWithdraw, userId);
+        User user = userRepository.changeBalanceByAmount(-1 * amountToWithdraw, userId);
+        transactionRepository.save(new NonTransferTransaction(user, Transaction.TransactionType.WITHDRAW, amountToWithdraw, new Date()));
         return "Withdraw to user " + userId + " of amount " + amountToWithdraw;
     }
 
@@ -65,8 +74,9 @@ public class TransactionService {
         if (transfereeId == transfererId) {
             throw new IllegalArgumentException("Cannot transfer from and to same account");
         }
-        changeBalanceByAmount(amount, transfereeId);
-        changeBalanceByAmount(-1 * amount, transfererId);
+        User byUser = changeBalanceByAmount(amount, transfereeId);
+        User toUser = changeBalanceByAmount(-1 * amount, transfererId);
+        transactionRepository.save(new TransferTransaction(byUser, toUser, Transaction.TransactionType.TRANSFER,amount, new Date()));
         return "Transfer from user with id " + transfererId + " to user with id " + requestBody.getTransfereeId();
     }
 
@@ -77,11 +87,12 @@ public class TransactionService {
      * @return return the id of the user to display in the http response
      * @throws ClassNotFoundException
      */
-    private int changeBalanceByAmount(float amount, int userId) throws ClassNotFoundException {
+    @Transactional
+    private User changeBalanceByAmount(float amount, int userId) throws ClassNotFoundException {
         userRepository.changeBalanceByAmount(amount, userId);
-        return userId;
+        User user  = userRepository.findById(userId).orElseThrow(() -> new UsernameNotFoundException(String.format("User with id %d is not found", userId)));
+        return user;
     }
-
 
     /**
      * Cuts the authorization request header and gets the token then query the token to JWTs to retrieve the userId
@@ -106,5 +117,4 @@ public class TransactionService {
             throw new IllegalArgumentException("Invalid Transferee Id");
         }
     }
-
 }

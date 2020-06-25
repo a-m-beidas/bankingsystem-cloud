@@ -15,6 +15,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE users u SET u.balance = u.balance + ?1 WHERE u.user_id = ?2", nativeQuery = true)
-    void changeBalanceByAmount(float amount, int userId);
+    @Query(value = "UPDATE users u SET u.balance = u.balance + ?1 WHERE u.id = ?2", nativeQuery = true)
+    User changeBalanceByAmount(float amount, int userId);
 }
