@@ -20,11 +20,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE users u SET u.logged_out = TRUE WHERE u.id = ?1", nativeQuery = true)
+    @Query(value = "UPDATE users u SET u.current_token_expired=TRUE, u.token_in_database=u.token_in_database+1 WHERE u.id=?1", nativeQuery = true)
     void logout(int userId);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE users u SET u.logged_out = FALSE WHERE u.username = ?1", nativeQuery = true)
+    @Query(value = "UPDATE users u SET u.current_token_expired=FALSE WHERE u.username=?1", nativeQuery = true)
     void login(String username);
 }

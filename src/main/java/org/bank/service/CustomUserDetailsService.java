@@ -1,13 +1,12 @@
 package org.bank.service;
 
 
+import org.bank.model.CustomUserDetails;
 import org.bank.model.Role;
 import org.bank.model.User;
 import org.bank.repository.UserRepository;
-import org.bank.model.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,6 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     /**
+     * Used by {@link AuthenticationService#authenticate(User)} and {@link org.bank.security.RequestFilter}
      * Overrides the {@link UserDetailsService#loadUserByUsername(String)} method
      * @return returns {@link CustomUserDetails}
      */
@@ -40,7 +40,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         for (Role role: user.getRoles()) {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRole()));
         }
-        return new CustomUserDetails(user.getUsername(), user.getPassword(), user.getId(), user.isLoggedOut(), authorities);
+        return new CustomUserDetails(user.getUsername(), user.getPassword(), user.getId(), user.isTokenExpired(), user.getDatabaseToken(), authorities);
     }
 
     public User save(User user) {

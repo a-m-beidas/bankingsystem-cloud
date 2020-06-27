@@ -1,15 +1,6 @@
 package org.bank.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +20,10 @@ public class User {
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_type"))
     private List<Role> roles;
-    @Column(name = "logged_out")
-    private boolean loggedOut;
+    @Column(name = "current_token_expired")
+    private boolean currentTokenExpired;
+    @Column(name = "token_in_database")
+    private int databaseToken;
 
     public User() {
     }
@@ -42,12 +35,12 @@ public class User {
         this.roles = roles;
     }
 
-    public void setLoggedIn() {
-        loggedOut = false;
+    public boolean isTokenExpired() {
+        return currentTokenExpired;
     }
 
-    public boolean isLoggedOut() {
-        return loggedOut;
+    public int getDatabaseToken() {
+        return databaseToken;
     }
 
     public int getId() {
@@ -70,12 +63,5 @@ public class User {
         this.password = password;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
 }
 

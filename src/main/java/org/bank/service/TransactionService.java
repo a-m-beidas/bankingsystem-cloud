@@ -1,13 +1,13 @@
 package org.bank.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.bank.model.*;
+import org.bank.model.TransferTransactionRequestDetails;
 import org.bank.repository.TransactionRepository;
 import org.bank.repository.UserRepository;
 import org.bank.security.TokenUtility;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.util.Date;
 

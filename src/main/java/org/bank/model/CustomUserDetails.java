@@ -3,6 +3,7 @@ package org.bank.model;
 import org.bank.security.TokenUtility;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+
 import java.util.Collection;
 
 /**
@@ -12,7 +13,8 @@ import java.util.Collection;
 public class CustomUserDetails extends User {
 
     private final int id;
-    private boolean loggedOut;
+    private boolean currentTokenExpired;
+    private final int databaseToken;
 
     /**
      * Calls super {@link User} <br>
@@ -22,14 +24,20 @@ public class CustomUserDetails extends User {
      * @param userId
      * @param authorities
      */
-    public CustomUserDetails(String username, String password, int userId, boolean loggedOut, Collection<? extends GrantedAuthority> authorities) {
+    public CustomUserDetails(String username, String password, int userId, boolean currentTokenExpired, int databaseToken, Collection<? extends GrantedAuthority> authorities) {
+        //TODO use the fields inside the superclass
         super(username, password, authorities);
         id = userId;
-        this.loggedOut = loggedOut;
+        this.currentTokenExpired = currentTokenExpired;
+        this.databaseToken = databaseToken;
     }
 
-    public boolean isLoggedOut() {
-        return loggedOut;
+    public boolean isCurrentTokenExpired() {
+        return currentTokenExpired;
+    }
+
+    public int getDatabaseToken() {
+        return databaseToken;
     }
 
     public int getId() {
