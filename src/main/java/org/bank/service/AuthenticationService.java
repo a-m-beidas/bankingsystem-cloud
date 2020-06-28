@@ -27,7 +27,14 @@ public class AuthenticationService {
     @Autowired
     CustomUserDetailsService userDetailsService;
 
+    /**
+     * If the user is logged in previously this will log him out
+     * @param user
+     * @return
+     * @throws Exception
+     */
     public String authenticate(User user) throws Exception {
+        userRepository.login(user.getUsername());
         //TODO check if already logged in
         validateUser(user);
         try {
@@ -38,7 +45,6 @@ public class AuthenticationService {
             throw new Exception("Bad Credentials");
         }
         CustomUserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-        userRepository.login(user.getUsername());
         return tokenUtility.generateToken(userDetails);
     }
 

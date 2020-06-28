@@ -11,12 +11,7 @@ import java.util.Date;
  */
 public class Transaction {
 
-    protected Transaction(User byUser, TransactionType transactionType, float amount, Date date) {
-        this.byUser = byUser;
-        this.transactionType = transactionType;
-        this.amount = amount;
-        this.date = date;
-    }
+
 
     public enum TransactionType {
         DEPOSIT, WITHDRAW, TRANSFER
@@ -35,5 +30,12 @@ public class Transaction {
     @Column(columnDefinition = "INT UNSIGNED")
     private float amount;
     private Date date;
+
+    protected Transaction(User byUser, TransactionType transactionType, float amount, Date date) {
+        this.byUser = byUser;
+        this.transactionType = transactionType;
+        this.amount = amount;
+        this.date = date;
+    }
 
 }
