@@ -3,7 +3,7 @@ package org.bank.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import org.bank.model.AuthenticationUserDetails;
-import org.bank.service.CustomUserDetailsService;
+import org.bank.service.AuthenticationUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,7 +26,7 @@ public class RequestFilter extends OncePerRequestFilter {
     TokenUtility tokenUtility;
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private AuthenticationUserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {

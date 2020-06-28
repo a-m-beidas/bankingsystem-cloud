@@ -2,7 +2,7 @@ package org.bank.security;
 
 import org.bank.config.AccessDeniedHandlerImpl;
 import org.bank.config.AuthenticationEntryPointImpl;
-import org.bank.service.CustomUserDetailsService;
+import org.bank.service.AuthenticationUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private AuthenticationUserDetailsService userDetailsService;
 
     @Autowired
     private RequestFilter requestFilter;

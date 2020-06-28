@@ -25,7 +25,7 @@ public class AuthenticationService {
     TokenUtility tokenUtility;
 
     @Autowired
-    CustomUserDetailsService userDetailsService;
+    AuthenticationUserDetailsService userDetailsService;
 
     /**
      * If the user is logged in previously this will log him out
