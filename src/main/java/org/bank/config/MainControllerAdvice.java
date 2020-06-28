@@ -1,4 +1,4 @@
-package org.bank.controller;
+package org.bank.config;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class MainControllerAdvice {
+    //TODO good way to handle exceptions
     @ExceptionHandler
     public ResponseEntity<String> genericHandler(Exception e) throws Exception {
         e.printStackTrace();

@@ -35,11 +35,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .authorizeRequests()
                 //Permit access to these paths without authentication
-                .antMatchers(HttpMethod.POST,"/register", "/authenticate", "/v2/**").permitAll()
+                .antMatchers(HttpMethod.POST,"/register", "/login").permitAll()
                 .antMatchers(HttpMethod.GET,"/v2/**").permitAll()
                 //Authenticate users according to their role
                 .antMatchers(HttpMethod.POST,"/transactions/**").authenticated()
-                .antMatchers(HttpMethod.GET,"/t").authenticated()
+                .antMatchers(HttpMethod.GET,"/logout").authenticated()
                 //Otherwise Deny any access even if authenticated
                 .anyRequest().denyAll()
             .and()
@@ -50,7 +50,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
-                .addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class)
+                //TODO is this correct?
+                .logout().disable();
+
     }
 
     @Autowired

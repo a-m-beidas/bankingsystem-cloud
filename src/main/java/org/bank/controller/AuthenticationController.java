@@ -13,13 +13,13 @@ public class AuthenticationController {
     @Autowired
     AuthenticationService authenticationService;
 
-    @PostMapping(path = "/authenticate")
+    @PostMapping(path = "/login")
     public ResponseEntity<String> login(@RequestBody User user) throws Exception {
         String token = authenticationService.authenticate(user);
         return new ResponseEntity<String>(token, HttpStatus.OK);
     }
 
-    @GetMapping(path= "/t")
+    @GetMapping(path= "/logout")
     public ResponseEntity<String> logout(@RequestHeader("Authorization") String authorizationHeader) throws ClassNotFoundException {
         authenticationService.logout(authorizationHeader);
         return new ResponseEntity<>("Log out Successful", HttpStatus.OK);
