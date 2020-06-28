@@ -18,13 +18,17 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "UPDATE users u SET u.balance = u.balance + ?1 WHERE u.id = ?2", nativeQuery = true)
     void changeBalanceByAmount(float amount, int userId);
 
+    /**
+     * Sets the token_in_database to a negative value to denote that it has expired
+     * @param userId
+     */
     @Modifying
     @Transactional
-    @Query(value = "UPDATE users u SET u.current_token_expired=TRUE, u.token_in_database=u.token_in_database+1 WHERE u.id=?1", nativeQuery = true)
+    @Query(value = "UPDATE users u SET u.token_in_database=ABS(u.token_in_database) * -1, u.token_in_database=u.token_in_database-1 WHERE u.id=?1", nativeQuery = true)
     void logout(int userId);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE users u SET u.current_token_expired=FALSE WHERE u.username=?1", nativeQuery = true)
+    @Query(value = "UPDATE users u SET u.token_in_database=ABS(u.token_in_database) WHERE u.username=?1", nativeQuery = true)
     void login(String username);
 }

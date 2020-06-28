@@ -13,7 +13,6 @@ import java.util.Collection;
 public class CustomUserDetails extends User {
 
     private final int id;
-    private boolean currentTokenExpired;
     private final int databaseToken;
 
     /**
@@ -24,16 +23,19 @@ public class CustomUserDetails extends User {
      * @param userId
      * @param authorities
      */
-    public CustomUserDetails(String username, String password, int userId, boolean currentTokenExpired, int databaseToken, Collection<? extends GrantedAuthority> authorities) {
+    public CustomUserDetails(String username, String password, int userId, int databaseToken, Collection<? extends GrantedAuthority> authorities) {
         //TODO use the fields inside the superclass
         super(username, password, authorities);
         id = userId;
-        this.currentTokenExpired = currentTokenExpired;
         this.databaseToken = databaseToken;
     }
 
+    /**
+     * When logged out the the field databaseToken is set to its negative complement to denote that it is has expired
+     * @return
+     */
     public boolean isCurrentTokenExpired() {
-        return currentTokenExpired;
+        return databaseToken < 0;
     }
 
     public int getDatabaseToken() {

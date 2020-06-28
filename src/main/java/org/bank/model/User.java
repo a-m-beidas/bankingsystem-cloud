@@ -20,9 +20,10 @@ public class User {
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_type"))
     private List<Role> roles;
-    @Column(name = "current_token_expired")
-    private boolean currentTokenExpired;
     @Column(name = "token_in_database")
+    /**
+     * If negative this means that the token has expired, if positive then it has not
+     */
     private int databaseToken;
 
     public User() {
@@ -33,10 +34,6 @@ public class User {
         this.password = password;
         this.balance = balance;
         this.roles = roles;
-    }
-
-    public boolean isTokenExpired() {
-        return currentTokenExpired;
     }
 
     public int getDatabaseToken() {

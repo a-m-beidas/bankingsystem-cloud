@@ -40,7 +40,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         for (Role role: user.getRoles()) {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRole()));
         }
-        return new CustomUserDetails(user.getUsername(), user.getPassword(), user.getId(), user.isTokenExpired(), user.getDatabaseToken(), authorities);
+        return new CustomUserDetails(user.getUsername(), user.getPassword(), user.getId(), user.getDatabaseToken(), authorities);
     }
 
     public User save(User user) {
