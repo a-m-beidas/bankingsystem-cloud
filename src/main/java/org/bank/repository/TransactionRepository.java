@@ -1,6 +1,6 @@
 package org.bank.repository;
 
-import org.bank.model.Transaction;
+import org.bank.model.transaction.TransactionSuper;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import java.util.Date;
 
 
-public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
+public interface TransactionRepository extends JpaRepository<TransactionSuper, Integer> {
 
     /**
      * In order to add a transaction in hibernate one needs the complete persisted object as follows:

@@ -2,7 +2,7 @@ package org.bank.security;
 
 
 import io.jsonwebtoken.ExpiredJwtException;
-import org.bank.model.CustomUserDetails;
+import org.bank.model.AuthenticationUserDetails;
 import org.bank.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -47,7 +47,7 @@ public class RequestFilter extends OncePerRequestFilter {
         }
         //Validate and add
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            CustomUserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            AuthenticationUserDetails userDetails = userDetailsService.loadUserByUsername(username);
             if (tokenUtility.validateToken(token, userDetails)) {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());

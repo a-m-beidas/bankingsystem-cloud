@@ -1,4 +1,6 @@
-package org.bank.model;
+package org.bank.model.transaction;
+
+import org.bank.model.User;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,7 +11,7 @@ import java.util.Date;
  * Transaction is a super class for the two classes TransferTransaction and NonTransferTransaction, annotated with @MappedSuperclass
  * will not create a table in the database but provides functionality and fields to the subclasses
  */
-public class Transaction {
+public class TransactionSuper {
 
 
 
@@ -31,7 +33,7 @@ public class Transaction {
     private float amount;
     private Date date;
 
-    protected Transaction(User byUser, TransactionType transactionType, float amount, Date date) {
+    protected TransactionSuper(User byUser, TransactionType transactionType, float amount, Date date) {
         this.byUser = byUser;
         this.transactionType = transactionType;
         this.amount = amount;

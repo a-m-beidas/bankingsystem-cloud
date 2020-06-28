@@ -8,22 +8,22 @@ import java.util.Collection;
 
 /**
  * Extends {@link User} with an id field
- * works with {@link TokenUtility#generateToken(CustomUserDetails)}
+ * works with {@link TokenUtility#generateToken(AuthenticationUserDetails)}
  */
-public class CustomUserDetails extends User {
+public class AuthenticationUserDetails extends User {
 
     private final int id;
     private final int databaseToken;
 
     /**
      * Calls super {@link User} <br>
-     * works with {@link TokenUtility#generateToken(CustomUserDetails)}
+     * works with {@link TokenUtility#generateToken(AuthenticationUserDetails)}
      * @param username username
      * @param password password
      * @param userId
      * @param authorities
      */
-    public CustomUserDetails(String username, String password, int userId, int databaseToken, Collection<? extends GrantedAuthority> authorities) {
+    public AuthenticationUserDetails(String username, String password, int userId, int databaseToken, Collection<? extends GrantedAuthority> authorities) {
         //TODO use the fields inside the superclass
         super(username, password, authorities);
         id = userId;

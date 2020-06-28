@@ -1,7 +1,7 @@
 package org.bank.service;
 
 
-import org.bank.model.CustomUserDetails;
+import org.bank.model.AuthenticationUserDetails;
 import org.bank.model.Role;
 import org.bank.model.User;
 import org.bank.repository.UserRepository;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class AuthenticationUserDetailsService implements UserDetailsService {
 
     @Autowired
     UserRepository repository;
@@ -24,23 +24,23 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     PasswordEncoder bcryptEncoder;
 
-    public CustomUserDetailsService(UserRepository repository) {
+    public AuthenticationUserDetailsService(UserRepository repository) {
         super();
     }
 
     /**
      * Used by {@link AuthenticationService#authenticate(User)} and {@link org.bank.security.RequestFilter}
      * Overrides the {@link UserDetailsService#loadUserByUsername(String)} method
-     * @return returns {@link CustomUserDetails}
+     * @return returns {@link AuthenticationUserDetails}
      */
     @Override
-    public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public AuthenticationUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = repository.findByUsername(username);
         ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(user.getRoles().size());
         for (Role role: user.getRoles()) {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRole()));
         }
-        return new CustomUserDetails(user.getUsername(), user.getPassword(), user.getId(), user.getDatabaseToken(), authorities);
+        return new AuthenticationUserDetails(user.getUsername(), user.getPassword(), user.getId(), user.getDatabaseToken(), authorities);
     }
 
     public User save(User user) {

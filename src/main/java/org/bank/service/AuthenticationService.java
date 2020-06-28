@@ -1,6 +1,6 @@
 package org.bank.service;
 
-import org.bank.model.CustomUserDetails;
+import org.bank.model.AuthenticationUserDetails;
 import org.bank.model.User;
 import org.bank.repository.UserRepository;
 import org.bank.security.TokenUtility;
@@ -44,7 +44,7 @@ public class AuthenticationService {
         } catch (BadCredentialsException e) {
             throw new Exception("Bad Credentials");
         }
-        CustomUserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+        AuthenticationUserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
         return tokenUtility.generateToken(userDetails);
     }
 

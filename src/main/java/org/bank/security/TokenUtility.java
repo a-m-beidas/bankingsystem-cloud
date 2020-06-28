@@ -4,7 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.bank.controller.AuthenticationController;
-import org.bank.model.CustomUserDetails;
+import org.bank.model.AuthenticationUserDetails;
 import org.bank.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -78,11 +78,11 @@ public class TokenUtility implements Serializable {
      * Generates the token with the id in the payload
      * called by {@link AuthenticationController#login(User)} <br>
      * Id retrieval by {@link #getUserIdFromHeader(String)} (String)} <br>
-     * see {@link CustomUserDetails} <br>
+     * see {@link AuthenticationUserDetails} <br>
      * @param userDetails userDetails
      * @return the token
      */
-    public String generateToken(CustomUserDetails userDetails) {
+    public String generateToken(AuthenticationUserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         // add the
         claims.put("id", userDetails.getId());
@@ -102,7 +102,7 @@ public class TokenUtility implements Serializable {
     }
 
     //validate token
-    public Boolean validateToken(String token, CustomUserDetails userDetails) {
+    public Boolean validateToken(String token, AuthenticationUserDetails userDetails) {
         final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername())
                 && !isTokenExpired(token) && !userDetails.isCurrentTokenExpired()
