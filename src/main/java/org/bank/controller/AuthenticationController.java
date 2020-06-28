@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AuthenticationController {
-
+    //TODO privacy
     @Autowired
     AuthenticationService authenticationService;
 
