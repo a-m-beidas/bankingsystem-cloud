@@ -10,7 +10,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    @Column(name = "id", columnDefinition = "UNSIGNED")
+    @Column(name = "id", columnDefinition = "INT UNSIGNED")
     private int id;
     private String username;
     private String password;

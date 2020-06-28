@@ -24,12 +24,12 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "transaction_id", columnDefinition = "UNSIGNED")
+    @Column(name = "transaction_id", columnDefinition = "INT UNSIGNED ")
     private int transactionId;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "by_user", referencedColumnName = "id", nullable = false)
     private User byUser;
-    @Column(name = "transaction_type", columnDefinition = "UNSIGNED")
+    @Column(name = "transaction_type", columnDefinition = "INT UNSIGNED ")
     @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
     private float amount;
