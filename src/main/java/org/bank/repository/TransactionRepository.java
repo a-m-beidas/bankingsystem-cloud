@@ -32,6 +32,6 @@ public interface TransactionRepository extends JpaRepository<TransactionSuper, I
      */
     @Modifying
     @Transactional
-    @Query(nativeQuery = true, value="insert into non_transfer_transactions (by_user, transaction_type, amount, date) value (?,?,?,?)")
+    @Query(nativeQuery = true, value="insert into deposit_withdraw_transactions (by_user, transaction_type, amount, date) value (?,?,?,?)")
     void addNonTransferTransaction(int byUser, String transactionType, float amount, java.sql.Date date);
 }
