@@ -1,6 +1,6 @@
 spring:
   application:
-    name: banking-service
+    name: banking
     cloud:
       config:
-        uri: http://localhost:8761
+        uri: http://localhost:8888

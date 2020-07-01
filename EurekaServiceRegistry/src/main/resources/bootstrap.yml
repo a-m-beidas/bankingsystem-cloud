@@ -1,6 +1,6 @@
 spring:
   application:
-    name: eureka-service-registry
+    name: serviceregistry
     cloud:
       config:
-        uri: http://localhost:8761
+        uri: http://localhost:8888

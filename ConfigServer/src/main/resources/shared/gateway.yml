@@ -1,0 +1,15 @@
+ribbon:
+  ReadTimeout : 60000
+  eureka:
+    enabled: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+zuul:
+  routes:
+    banking:
+      path : /**
+      serviceId: banking
+      stripPrefix: false
