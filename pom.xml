@@ -17,6 +17,7 @@
         <module>EurekaServiceRegistry</module>
         <module>EurekaClient</module>
         <module>FeignClient</module>
+        <module>ConfigServer</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
