@@ -16,7 +16,7 @@
     <modules>
         <module>EurekaServiceRegistry</module>
         <module>EurekaClient</module>
-        <module>FeignClient</module>
+        <module>ZuulGateway</module>
         <module>ConfigServer</module>
         <module>BankingSystem</module>
     </modules>
