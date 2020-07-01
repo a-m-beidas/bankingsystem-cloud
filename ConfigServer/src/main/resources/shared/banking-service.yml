@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      order_inserts: true
+      order_updatest: true
+      jdbc:
+        batch_size: 4
+    generate-ddl: true
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/test5
+    username: root
+    password: root
+jwt :
+  secret: javainuse
