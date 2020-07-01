@@ -12,5 +12,7 @@ spring:
     url: jdbc:mysql://localhost:3306/test5
     username: root
     password: root
-jwt :
+jwt:
   secret: javainuse
+server:
+  port: 8081
