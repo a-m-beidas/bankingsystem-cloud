@@ -1,5 +1,7 @@
 package org.bank.service;
 
+import org.bank.exception.AuthenticationJWTException;
+import org.bank.exception.MissingCredentialsRequestException;
 import org.bank.model.AuthenticationUserDetails;
 import org.bank.model.User;
 import org.bank.repository.UserRepository;
@@ -40,9 +42,9 @@ public class AuthenticationService {
         try {
             authenticationManger.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         } catch (DisabledException e) {
-            throw new Exception("Disabled user");
+            throw new AuthenticationJWTException("Disabled user");
         } catch (BadCredentialsException e) {
-            throw new Exception("Bad Credentials");
+            throw new AuthenticationJWTException("Bad Credentials");
         }
         AuthenticationUserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
         return tokenUtility.generateToken(userDetails);
@@ -56,10 +58,10 @@ public class AuthenticationService {
 
     private void validateUser(User user) {
         if (user.getUsername() == null) {
-            throw new IllegalArgumentException("No username provided");
+            throw new MissingCredentialsRequestException("No username provided");
         }
         if (user.getPassword() == null) {
-            throw new IllegalArgumentException("No password provided");
+            throw new MissingCredentialsRequestException("No password provided");
         }
     }
 }

@@ -1,6 +1,7 @@
 package org.bank.service;
 
 
+import org.bank.exception.UserWithNoRolesException;
 import org.bank.model.AuthenticationUserDetails;
 import org.bank.model.Role;
 import org.bank.model.User;
@@ -45,7 +46,7 @@ public class AuthenticationUserDetailsService implements UserDetailsService {
 
     public User save(User user) {
         if(user.getRoles().isEmpty())
-            throw new IllegalStateException("User must have at least one role");
+            throw new UserWithNoRolesException();
         user.setPassword(bcryptEncoder.encode(user.getPassword()));
         return repository.save(user);
     }

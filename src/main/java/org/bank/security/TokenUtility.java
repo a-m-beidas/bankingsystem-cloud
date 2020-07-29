@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.bank.controller.AuthenticationController;
+import org.bank.exception.IllegalJWTException;
 import org.bank.model.AuthenticationUserDetails;
 import org.bank.model.User;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,12 +46,11 @@ public class TokenUtility implements Serializable {
      * @throws ClassNotFoundException if token is invalid
      */
     public int getUserIdFromHeader(String authorizationHeader) throws ClassNotFoundException {
-
         String token = authorizationHeader.substring(7);
         Claims claims = getAllClaimsFromToken(token);
         Object id = claims.get("id");
         if (id == null) {
-            throw new ClassNotFoundException("Token is valid but does not store any id");
+            throw new IllegalJWTException("Token is valid but does not store any id");
         }
         return (int) id;
     }
@@ -59,7 +59,7 @@ public class TokenUtility implements Serializable {
         Claims claims = getAllClaimsFromToken(token);
         Object databaseToken = claims.get("database_token");
         if (databaseToken == null)
-            throw new IllegalStateException("Token present but field for key returned null");
+            throw new IllegalJWTException("Token is valid but does not store the database of the Token");
         return (int) databaseToken;
     }
 
