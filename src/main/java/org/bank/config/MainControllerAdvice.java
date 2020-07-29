@@ -16,29 +16,26 @@ public class MainControllerAdvice {
 
     Logger logger = LoggerFactory.getLogger(MainControllerAdvice.class);
 
-    //TODO good way to handle exceptions
     @ExceptionHandler
     public ResponseEntity<String> genericHandler(AuthenticationJWTException e) throws Exception {
-        logger.warn(e.getMessage());
         return new ResponseEntity<>("Authentication failed", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler
     public ResponseEntity<String> genericHandler(IllegalJWTException e) throws Exception {
+        logger.error(e.getMessage());
         return new ResponseEntity<>("Authentication failed", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-
     @ExceptionHandler
     public ResponseEntity<String> genericHandler(MissingCredentialsRequestException e) throws Exception {
-        logger.warn(e.getMessage());
+        logger.error(e.getMessage());
         return new ResponseEntity<>("Credentials Missing", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-
     @ExceptionHandler
     public ResponseEntity<String> genericHandler(UserWithNoRolesException e) throws Exception {
-        logger.warn(e.getMessage());
+        logger.error(e.getMessage());
         return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
