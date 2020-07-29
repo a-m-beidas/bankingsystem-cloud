@@ -1,8 +1,8 @@
 package org.bank.exception;
 
-public class AuthenticationJWTException extends AbstractJWTException {
+public class AuthenticationJWTException extends RuntimeException {
 
-    public AuthenticationJWTException(String message, String token) {
-        super(message, token);
+    public AuthenticationJWTException(String message) {
+        super(message);
     }
 }
