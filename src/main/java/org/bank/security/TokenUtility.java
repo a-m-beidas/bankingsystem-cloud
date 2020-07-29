@@ -50,7 +50,7 @@ public class TokenUtility implements Serializable {
         Claims claims = getAllClaimsFromToken(token);
         Object id = claims.get("id");
         if (id == null) {
-            throw new IllegalJWTException("Token is valid but does not store any id");
+            throw new IllegalJWTException("Token is valid but does not store any id", token);
         }
         return (int) id;
     }
@@ -59,7 +59,7 @@ public class TokenUtility implements Serializable {
         Claims claims = getAllClaimsFromToken(token);
         Object databaseToken = claims.get("database_token");
         if (databaseToken == null)
-            throw new IllegalJWTException("Token is valid but does not store the database of the Token");
+            throw new IllegalJWTException("Token is valid but does not store the database of the Token", token);
         return (int) databaseToken;
     }
 
