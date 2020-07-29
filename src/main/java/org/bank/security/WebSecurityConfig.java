@@ -38,7 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/register", "/login").permitAll()
                 .antMatchers(HttpMethod.GET,"/v2/**").permitAll()
                 //Authenticate users according to their role
-                .antMatchers(HttpMethod.POST,"/transactions/**").authenticated()
+                .antMatchers(HttpMethod.GET, "/admin/**").hasRole("admin")
+                .antMatchers(HttpMethod.POST,"/transactions/**").hasRole("user")
                 .antMatchers(HttpMethod.GET,"/logout").authenticated()
                 //Otherwise Deny any access even if authenticated
                 .anyRequest().denyAll()

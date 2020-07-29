@@ -36,7 +36,7 @@ public class DatabaseDummyData {
         roles.put("user", user);
         roleRepository.saveAll(roles.values());
         ArrayList<User> users = new ArrayList<User>();
-        users.add(new User("John", bcryptEncoder.encode("123"), 30000.0f, getRolesArrayList(user)));
+        users.add(new User("John", bcryptEncoder.encode("123"), 30000.0f, getRolesArrayList(user, admin)));
         users.add(new User("Matt", bcryptEncoder.encode("124"), 500.0f, getRolesArrayList(user)));
         users.add(new User("Blake", bcryptEncoder.encode("125"), 5050.f, getRolesArrayList(user)));
         users.add(new User("Candelaria", bcryptEncoder.encode("125"), 5050.f, getRolesArrayList(user)));
