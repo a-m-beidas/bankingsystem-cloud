@@ -2,7 +2,7 @@
 Hypothetical banking system using spring back-end
 <ul>
     <li>Bank transactions API</li>
-    <li>Authentication using JWT</li>
-    <li>SQL database</li>
-    <li>Docker</li>
+    <li>Authentication using JWT and Spring Security</li>
+    <li>SQL database with hibernate</li>
+    <li>Docker and Docker-Compose</li>
 </ul>
