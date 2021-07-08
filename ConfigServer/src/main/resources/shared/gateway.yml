@@ -1,16 +1,28 @@
-ribbon:
-  ReadTimeout : 60000
-  eureka:
+server:
+  port: 443
+  ssl:
     enabled: true
+    key-store: classpath:zuul-keystore.jks
+    key-store-password: zuulpass
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}
+ribbon:
+  ReadTimeout : 1000
+  eureka:
+    enabled: true
+  CustomSSLSocketFactoryClassName: com.netflix.http4.ssl.AcceptAllSocketFactory
+  TrustStore: classpath:zuul-keystore.jks
+  TrustStorePassword: zuulpass
 zuul:
   routes:
     banking:
       path : /**
       serviceId: banking
       stripPrefix: false
-server:
-  port: 80
