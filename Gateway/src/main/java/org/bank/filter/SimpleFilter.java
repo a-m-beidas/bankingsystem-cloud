@@ -1,4 +1,4 @@
-package com.example.filter;
+package org.bank.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;

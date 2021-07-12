@@ -9,13 +9,13 @@
         <version>2.2.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>org.example</groupId>
+    <groupId>org.bank</groupId>
     <artifactId>CloudBankApplication</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>ServiceRegistry</module>
         <module>ConfigServer</module>
+        <module>ServiceRegistry</module>
         <module>BankingSystem</module>
         <module>Gateway</module>
     </modules>

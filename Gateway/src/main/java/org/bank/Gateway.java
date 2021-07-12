@@ -1,6 +1,6 @@
-package com.example;
+package org.bank;
 
-import com.example.filter.SimpleFilter;
+import org.bank.filter.SimpleFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
