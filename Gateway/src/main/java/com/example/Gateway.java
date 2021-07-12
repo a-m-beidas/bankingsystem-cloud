@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @EnableZuulProxy
-public class GatewayZuul {
+public class Gateway {
 
     public static void main(String[] args) {
-        SpringApplication.run(GatewayZuul.class, args);
+        SpringApplication.run(Gateway.class, args);
     }
 
     @Bean

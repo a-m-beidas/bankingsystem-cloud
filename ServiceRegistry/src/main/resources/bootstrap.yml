@@ -6,7 +6,7 @@ spring:
         max-interval: 1000
         max-attempts: 4
   application:
-    name: serviceregistry
+    name: service-registry
     cloud:
       config:
         uri: http://localhost:8888
