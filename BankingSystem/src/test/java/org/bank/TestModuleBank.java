@@ -3,10 +3,10 @@ package org.bank;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class TestModule {
+//@SpringBootTest
+class TestModuleBank {
 
-	@Test
+//	@Test
 	void contextLoads() {
 	}
 
