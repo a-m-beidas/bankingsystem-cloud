@@ -6,12 +6,7 @@ spring:
         max-interval: 1000
         max-attempts: 4
   application:
-    name: banking
+    name: gateway
     cloud:
       config:
         uri: http://localhost:8888
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
