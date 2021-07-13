@@ -9,10 +9,14 @@ spring:
     generate-ddl: true
     show-sql: true
   datasource:
-    url: jdbc:mysql://localhost:3306/test5?serverTimezone=Asia/Jerusalem
+    url: jdbc:mysql://microservice-mysql:3306/test5?serverTimezone=Asia/Jerusalem
     username: root
     password: root
 jwt:
   secret: javainuse
 server:
-  port: 8081
+  port: 8080
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://microservice-registry:8761/eureka/

@@ -24,14 +24,14 @@ services:
   microservice-gateway:
     build: Gateway
 #    image: microservice-gateway
-
     ports:
       - "443:443"
     depends_on:
       - microservice-config
-  microservice-service-registry:
+  # ----------------------------------------------
+  microservice-registry:
     build: ServiceRegistry
-#    image: microservice-service-registry
+#    image: microservice-service
     ports:
       - "8761:8761"
     depends_on:
