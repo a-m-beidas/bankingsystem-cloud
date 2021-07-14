@@ -10,6 +10,6 @@ spring:
     show-sql: true
     database-platform : org.hibernate.dialect.MySQL5InnoDBDialect
   datasource:
-    url: jdbc:mysql://docker-mysql:3306/test5?autoReconnect=true&useSSL=false
+    url: jdbc:mysql://docker-mysql:3306/test5?allowPublicKeyRetrieval=true&useSSL=false
     username: root
     password: root
