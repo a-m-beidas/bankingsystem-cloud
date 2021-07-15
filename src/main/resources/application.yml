@@ -9,3 +9,6 @@ spring:
     generate-ddl: false
     show-sql: true
     database-platform : org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    data: classpath:schema.sql
+    initialization-mode: always
