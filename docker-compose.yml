@@ -3,18 +3,21 @@ services:
   # ----------------------------------------------
   microservice-mysql:
     image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=main
     ports:
       - "3306:3306"
   # ----------------------------------------------
   microservice-config:
     build: ConfigServer
-#    image: microservice-config
+    #    image: microservice-config
     ports:
       - "8888:8888"
   # ----------------------------------------------
   microservice-banking:
     build: BankingSystem
-#    image: microservice-banking
+    #    image: microservice-banking
     ports:
       - "8080:8080"
     depends_on:
@@ -23,7 +26,7 @@ services:
   # ----------------------------------------------
   microservice-gateway:
     build: Gateway
-#    image: microservice-gateway
+    #    image: microservice-gateway
     ports:
       - "443:443"
     depends_on:
@@ -31,7 +34,7 @@ services:
   # ----------------------------------------------
   microservice-registry:
     build: ServiceRegistry
-#    image: microservice-service
+    #    image: microservice-service
     ports:
       - "8761:8761"
     depends_on:

@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>CloudBankApplication</artifactId>
-		<groupId>org.example</groupId>
+		<groupId>org.bank</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<groupId>org.bank</groupId>

@@ -1,17 +1,19 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
       order_inserts: true
       order_updatest: true
       jdbc:
         batch_size: 4
-    generate-ddl: true
+    generate-ddl: false
     show-sql: true
   datasource:
-    url: jdbc:mysql://microservice-mysql:3306/test5?serverTimezone=Asia/Jerusalem
+    url: jdbc:mysql://microservice-mysql:3306/main?serverTimezone=Asia/Jerusalem
     username: root
     password: root
+    data: classpath:schema.sql
+    initialization-mode: always
 jwt:
   secret: javainuse
 server:

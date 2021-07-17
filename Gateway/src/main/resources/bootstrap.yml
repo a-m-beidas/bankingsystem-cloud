@@ -4,7 +4,7 @@ spring:
       uri: http://microservice-config:8888
       fail-fast: true
       retry:
-        max-interval: 1000
-        max-attempts: 4
+        max-interval: 2000
+        max-attempts: 8
   application:
     name: gateway
