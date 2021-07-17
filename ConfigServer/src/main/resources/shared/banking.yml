@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: dev
   jpa:
     hibernate:
       ddl-auto: none
@@ -9,9 +11,6 @@ spring:
     generate-ddl: false
     show-sql: true
   datasource:
-    url: jdbc:mysql://microservice-mysql:3306/main?serverTimezone=Asia/Jerusalem
-    username: root
-    password: root
     data: classpath:schema.sql
     initialization-mode: always
 jwt:
