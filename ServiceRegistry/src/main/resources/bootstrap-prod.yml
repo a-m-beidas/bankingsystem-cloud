@@ -1,0 +1,4 @@
+spring:
+  cloud:
+    config:
+      uri: http://microservice-config:8888

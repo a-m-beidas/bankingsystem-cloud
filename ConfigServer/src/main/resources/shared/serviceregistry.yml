@@ -7,6 +7,6 @@ eureka:
 #logging:
 #  level:
 #    com:
-#      netflix:
+#        netflix:
 #        eureka: OFF
 #        discovery: OFF
