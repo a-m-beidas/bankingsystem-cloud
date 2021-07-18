@@ -1,6 +1,6 @@
 version: '3'
 services:
-  # ----------------------------------------------
+#  # ----------------------------------------------
   microservice-mysql:
     image: mysql:latest
     environment:
@@ -15,6 +15,14 @@ services:
     ports:
       - "8888:8888"
   # ----------------------------------------------
+  microservice-registry:
+    build: ServiceRegistry
+    #    image: microservice-service
+    ports:
+      - "8761:8761"
+    depends_on:
+      - microservice-config
+  # ----------------------------------------------
   microservice-banking:
     build: BankingSystem
     #    image: microservice-banking
@@ -23,6 +31,7 @@ services:
     depends_on:
       - microservice-config
       - microservice-mysql
+      - microservice-registry
   # ----------------------------------------------
   microservice-gateway:
     build: Gateway
@@ -31,11 +40,4 @@ services:
       - "443:443"
     depends_on:
       - microservice-config
-  # ----------------------------------------------
-  microservice-registry:
-    build: ServiceRegistry
-    #    image: microservice-service
-    ports:
-      - "8761:8761"
-    depends_on:
-      - microservice-config
+      - microservice-registry
