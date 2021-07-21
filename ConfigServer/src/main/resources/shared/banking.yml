@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+      order_inserts: true
+      order_updatest: true
+      jdbc:
+        batch_size: 4
+    generate-ddl: false
+    show-sql: true
+  datasource:
+    data: classpath:schema.sql
+    initialization-mode: always
+jwt:
+  secret: javainuse
+server:
+  port: 8080

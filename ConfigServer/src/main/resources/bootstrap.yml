@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:${shared.config.path}/shared,classpath:/shared
+  profiles:
+    active: native
+server:
+  port: 8888

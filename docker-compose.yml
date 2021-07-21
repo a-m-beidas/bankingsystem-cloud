@@ -1,17 +1,43 @@
 version: '3'
 services:
-  docker-mysql:
+  #  # ----------------------------------------------
+  microservice-mysql:
     image: mysql:latest
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=main
     ports:
       - "3306:3306"
-    expose:
-      - "3306"
-  web-service:
-    build: .
+  # ----------------------------------------------
+  microservice-config:
+    build: ConfigServer
+    #    image: microservice-config
     ports:
-      - "80:80"
+      - "8888:8888"
+  # ----------------------------------------------
+  microservice-registry:
+    build: ServiceRegistry
+    #    image: microservice-service
+    ports:
+      - "8761:8761"
     depends_on:
-      - docker-mysql
+      - microservice-config
+  # ----------------------------------------------
+  microservice-banking:
+    build: BankingSystem
+    #    image: microservice-banking
+    ports:
+      - "8080:8080"
+    depends_on:
+      - microservice-config
+      - microservice-mysql
+      - microservice-registry
+  # ----------------------------------------------
+  microservice-gateway:
+    build: Gateway
+    #    image: microservice-gateway
+    ports:
+      - "443:443"
+    depends_on:
+      - microservice-config
+      - microservice-registry
