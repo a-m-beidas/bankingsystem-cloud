@@ -5,5 +5,5 @@ Model for a banking system using spring back-end
     <li>Authentication using JWT and Spring Security</li>
      <li>Authorization according to user roles</li>
     <li>SQL database with hibernate</li>
-    <li>Docker and Docker-Compose</li>
+    <li>Fast deployment to Docker</li>
 </ul>
