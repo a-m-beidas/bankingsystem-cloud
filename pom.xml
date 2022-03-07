@@ -16,9 +16,9 @@
 	<modules>
 		<module>ConfigServer</module>
 		<module>ServiceRegistry</module>
-		<module>BankingSystem</module>
 		<module>Gateway</module>
-	</modules>
+        <module>BankingSystemParent</module>
+    </modules>
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Hoxton.SR6</spring-cloud.version>
