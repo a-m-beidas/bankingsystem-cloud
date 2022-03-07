@@ -1,8 +1,0 @@
-spring:
-  cloud:
-    config:
-      uri: http://microservice-config:8888
-      fail-fast: true
-      retry:
-        max-interval: 2000
-        max-attempts: 8

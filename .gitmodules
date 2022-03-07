@@ -1,0 +1,4 @@
+[submodule "BankingSystemParent/bankingsystem"]
+	path = BankingSystemParent/bankingsystem
+	url = https://github.com/a-m-beidas/bankingsystem
+	branch = submodule
